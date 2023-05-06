@@ -1,0 +1,190 @@
+{% set title -%}
+{%- if project.name | length -%}
+# {{ project.name | escape | title }}
+
+{% endif %}
+{%- endset %}
+
+{% set badges -%}
+{%- if (project.repository.name | length) and (project.repository.owner | length) -%}
+<p align="left">
+  <img
+    src="https://img.shields.io/github/v/release/{{ project.repository.owner | escape }}/{{ project.repository.name | escape }}"
+    alt="latest release"
+  />
+  <img
+    src="https://img.shields.io/github/release-date/{{ project.repository.owner | escape }}/{{ project.repository.name | escape }}"
+    alt="release date"
+  />
+  <img
+    src="https://img.shields.io/github/languages/top/{{ project.repository.owner | escape }}/{{ project.repository.name | escape }}"
+    alt="top languages in the project"
+  />
+  <img
+    src="https://img.shields.io/github/commit-activity/y/{{ project.repository.owner | escape }}/{{ project.repository.name | escape }}"
+    alt="commit activity"
+  />
+  <img
+    src="https://img.shields.io/github/contributors/{{ project.repository.owner | escape }}/{{ project.repository.name | escape }}"
+    alt="contributors"
+  />
+</p>
+
+{% endif %}
+{%- endset %}
+
+{% set description -%}
+{%- if project.description | length -%}
+{{ project.description | escape }}
+
+{% endif %}
+{%- endset %}
+
+{%- set features -%}
+{%- if project.features | length -%}
+## Features
+{% for feature in project.features %}
+- {{ feature | escape | capitalize }}
+{%- endfor %}
+
+{% endif %}
+{%- endset %}
+
+{%- set getting_started -%}
+{%- if (project.installation | length) or (project.usage | length) -%}
+## Getting started
+
+{% endif %}
+{%- endset %}
+
+{%- set installation -%}
+{%- if project.installation | length -%}
+### Installation
+{% for installation in project.installation %}
+#### {{ installation.platform | escape }}
+
+```shell
+{%- for step in installation.steps %}
+{{ step | escape }}
+{%- endfor %}
+```
+{% endfor %}
+{% endif %}
+{%- endset -%}
+
+{%- set usage -%}
+{%- if project.usage | length -%}
+### Usage
+
+```shell
+{%- for step in project.usage.steps %}
+{{ step | escape }}
+{%- endfor %}
+```
+
+{% endif %}
+{%- endset %}
+
+{%- set examples -%}
+{%- if project.examples | length -%}
+### Examples
+
+```shell
+{%- for step in project.examples.steps %}
+{{ step | escape }}
+{%- endfor %}
+```
+
+{% endif %}
+{%- endset %}
+
+{%- set documentation -%}
+{%- if project.documentation.enabled and (project.repository.owner | length) and (project.repository.name | length) -%}
+## Documentation
+
+Read the [documentation][documentation].
+
+{% endif %}
+{%- endset %}
+
+{%- set support -%}
+{%- if project.support.enabled and (project.repository.owner | length) and (project.repository.name | length) -%}
+## Support
+
+Read the [support][support].
+
+{% endif %}
+{%- endset %}
+
+{%- set security %}
+{%- if project.security.enabled -%}
+## Security
+
+Read the [security][security].
+
+{% endif %}
+{%- endset %}
+
+{%- set contributing -%}
+{%- if project.contributing.enabled and (project.repository.owner | length) and (project.repository.name | length) -%}
+## Contributing
+
+Read the [contributing][contributing] guidelines.
+
+### Contributors
+
+<a href="https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo={{ project.repository.owner }}/{{ project.repository.name }}"
+    alt="list of the contributors" />
+</a>
+
+{% endif %}
+{%- endset %}
+
+{%- set license -%}
+{%- if (project.repository.owner | length ) and (project.repository.name | length) -%}
+## License
+
+Read the [license][license].
+
+<img src="https://img.shields.io/github/license/{{ project.repository.owner }}/{{ project.repository.name }}"
+  alt="license" />
+
+{% endif %}
+{%- endset %}
+
+{%- set project_status -%}
+{%- if (project.repository.owner) and (project.repository.name | length) -%}
+## Project status
+
+<p>
+  <img
+    src="https://img.shields.io/github/commit-activity/y/{{ project.repository.owner }}/{{ project.repository.name }}"
+    alt="commit activity"
+  />
+  <img
+      src="https://img.shields.io/github/last-commit/{{ project.repository.owner }}/{{ project.repository.name }}"
+      alt="last commit"
+  />
+</p>
+
+{% endif %}
+{%- endset %}
+
+{%- set references -%}
+{%- if project.documentation.enabled and (project.repository.owner | length) and (project.repository.name | length) -%}
+[documentation]: https://{{ project.repository.owner }}.github.io/{{ project.repository.name }}/
+{% endif %}
+{%- if project.support.enabled and (project.repository.owner | length) and (project.repository.name | length) -%}
+[support]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/blob/main/SUPPORT.md
+{% endif %}
+{%- if project.security.enabled and (project.repository.owner | length) and (project.repository.name | length) -%}
+[security]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/blob/main/SECURITY.md
+{% endif %}
+{%- if project.contributing.enabled and (project.repository.owner | length) and (project.repository.name | length) -%}
+[contributing]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/blob/main/CONTRIBUTING.md
+{% endif %}
+{%- if (project.repository.owner | length ) and (project.repository.name | length) -%}
+[license]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/blob/main/LICENSE
+{% endif %}
+{%- endset %}
