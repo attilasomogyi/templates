@@ -7,14 +7,15 @@
 - [Submission guidelines](#submission-guidelines)
 - [Coding rules](#coding-rules)
 - [Commit message guidelines](#commit-message-format)
+- [Developing](#developing)
 
 ## Code of conduct
 
-Please read and follow [Code of conduct][coc]
+Please read and follow [code of conduct][code_of_conduct].
 
 ## Question or problem
 
-Please read the [support]
+Please read the [support][support].
 
 ## Found a bug
 
@@ -81,7 +82,7 @@ Before [submitting an issue][new-issue-templates] to the Project, search the iss
 The Project team reserves the right not to accept pull
 requests from community members who haven't been good citizens of the community.
 Such behavior includes not following the [Project code of
-conduct][coc] and applies within or outside of Project
+conduct][code_of_conduct] and applies within or outside of Project
 managed channels.
 
 #### Addressing review feedback
@@ -181,10 +182,11 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 ### Project follows
 
 - [JavaScript style guide][js-style-guide]
+- [TypeScript style guide][ts-style-guide]
 - [Python style guide][py-style-guide]
 - [Java style guide][java-style-guide]
 - [Rust style guide][rust-style-guide]
-- [Shell Style guide][shell-style-guide]
+- [Shell style guide][shell-style-guide]
 - [HTML and CSS style guide][html-css-style-guide]
 - [SQL style guide][sql-style-guide]
 
@@ -294,7 +296,7 @@ the impact of the change.
 
 The footer can contain information about breaking changes and deprecations. It
 is also the place to reference GitHub issues, Jira tickets, and other PRs that
-this commit closes or it's relate to. For example:
+this commit closes, or it's relate to. For example:
 
 ```text
 BREAKING CHANGE: <breaking change summary>
@@ -317,16 +319,16 @@ Closes #<pr number>
 ```
 
 Breaking Change section should start with the phrase **BREAKING CHANGE:**.
-It follow by a summary of the breaking change, a blank line, and a detailed
+It follows by a summary of the breaking change, a blank line, and a detailed
 description of the breaking change that also includes migration instructions.
 
 Similarly, a Deprecation section should start with **DEPRECATED:**.
-It follow by a short description of what's deprecated, a blank line, and a detailed
+It follows by a short description of what's deprecated, a blank line, and a detailed
 description of the deprecation that also mentions the recommended update path.
 
 ### Revert commits
 
-If the commit reverts a earlier commit, it should begin with `revert:`,
+If the commit reverts an earlier commit, it should begin with `revert:`,
 followed by the header of the reverted commit.
 
 The content of the commit message body should contain:
@@ -335,17 +337,63 @@ The content of the commit message body should contain:
   format: `This reverts commit <Secure Hash Algorithm>`,
 - a clear description of the reason for reverting the commit message.
 
-[coc]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/blob/main/CODE_OF_CONDUCT.md
+## Developing
+
+### Prerequisites
+
+- [Git][git]
+- [Node.js][nodejs]
+- [Yarn][yarn]
+- [Python][python]
+- [Homebrew][homebrew]
+
+### Getting the sources
+
+Fork and clone the repository:
+
+1. Login to your GitHub account
+2. Fork the [{{ project.repository.owner }}/{{ project.repository.name }}][github] repository
+3. Clone your fork of the *{{ project.repository.name }}* repository and define an `upstream` remote pointing back to the *{{ project.repository.name }}* repository that you forked in the first place.
+
+```shell
+git clone \
+git@github.com:<github username>/{{ project.repository.name }}.git
+
+cd {{ project.repository.name }}
+
+git remote add upstream \
+git://github.com/{{ project.repository.owner }}/{{ project.repository.name }}.git
+```
+
+### Installing
+
+```shell
+yarn setup
+```
+
+### Testing
+
+```shell
+yarn test
+```
+
+[code_of_conduct]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/blob/main/CODE_OF_CONDUCT.md
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
 [dev-doc]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/blob/main/CONTRIBUTING.md
+[git]: https://git-scm.com/
 [github]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}
+[homebrew]: https://brew.sh/
 [html-css-style-guide]: https://google.github.io/styleguide/htmlcssguide.html
 [java-style-guide]: https://github.com/twitter-archive/commons/blob/master/src/java/com/twitter/common/styleguide.md
 [js-style-guide]: https://google.github.io/styleguide/jsguide.html
 [new-issue-templates]:https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/issues/new/choose
+[nodejs]: https://nodejs.org/
 [pull-request]: https://github.com/{{ project.repository.owner }}/{{ project.repository.owner }}/pulls
 [py-style-guide]: https://peps.python.org/pep-0008/
+[python]: https://www.python.org/
 [rust-style-guide]: https://rustc-dev-guide.rust-lang.org/conventions.html
 [shell-style-guide]: https://google.github.io/styleguide/shellguide.html
 [sql-style-guide]: https://github.com/treffynnon/sqlstyle.guide/blob/gh-pages/_includes/sqlstyle.guide.md
 [support]: https://github.com/{{ project.repository.owner }}/{{ project.repository.name }}/blob/main/SUPPORT.md
+[ts-style-guide]: https://google.github.io/styleguide/tsguide.html
+[yarn]: https://yarnpkg.com/
