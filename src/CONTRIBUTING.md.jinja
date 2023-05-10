@@ -356,7 +356,7 @@ Fork and clone the repository:
 3. Clone your fork of the *{{ project.repository.name }}* repository and define an `upstream` remote pointing back to the *{{ project.repository.name }}* repository that you forked in the first place.
 
 ```shell
-git clone \
+git clone --recurse-submodules \
 git@github.com:<github username>/{{ project.repository.name }}.git
 
 cd {{ project.repository.name }}
