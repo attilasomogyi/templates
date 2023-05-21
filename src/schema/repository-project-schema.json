@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "array": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50
+    },
+    "enabled": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type:": "boolean"
+        }
+      },
+      "required": ["enabled"]
+    },
+    "project_name": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]([a-z0-9 ])+$",
+      "maxLength": 50
+    },
+    "project_author": {
+      "type": "string",
+      "pattern": "^[A-Za-z -,.]+$",
+      "maxLength": 50
+    },
+    "repository_name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-_]+$",
+      "maxLength": 40
+    },
+    "repository_owner": {
+      "type": "string",
+      "pattern": "^[a-zd](?:[a-zd]|-(?=[a-zd])){0,38}$",
+      "maxLength": 39
+    },
+    "project_description": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9 -,.]+$"
+    },
+    "project_features": {
+      "$ref": "#/$defs/array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9 -,.]+$"
+      }
+    },
+    "installation": {
+      "$ref": "#/$defs/array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "ref": "#/$defs/string"
+          },
+          "steps": {
+            "$ref": "#/$defs/array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["platform", "steps"]
+      }
+    },
+    "usage": {
+      "type": "object",
+      "properties": {
+        "steps": {
+          "$ref": "#/$defs/array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "options": {
+          "$ref": "#/$defs/array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "description"]
+          }
+        }
+      },
+      "required": ["steps", "options"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/project_name"
+        },
+        "author": {
+          "$ref": "#/$defs/project_author"
+        },
+        "repository": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "$ref": "#/$defs/repository_name"
+            },
+            "owner": {
+              "$ref": "#/$defs/repository_owner"
+            }
+          },
+          "required": ["name", "owner"]
+        },
+        "description": {
+          "$ref": "#/$defs/project_description"
+        },
+        "documentation": {
+          "$ref": "#/$defs/enabled"
+        },
+        "support": {
+          "$ref": "#/$defs/enabled"
+        },
+        "security": {
+          "$ref": "#/$defs/enabled"
+        },
+        "contributing": {
+          "$ref": "#/$defs/enabled"
+        },
+        "features": {
+          "$ref": "#/$defs/project_features"
+        },
+        "installation": {
+          "$ref": "#/$defs/installation"
+        },
+        "usage": {
+          "$ref": "#/$defs/usage"
+        }
+      },
+      "required": [
+        "name",
+        "author",
+        "repository",
+        "description",
+        "documentation",
+        "support",
+        "security",
+        "contributing",
+        "features",
+        "installation",
+        "usage"
+      ]
+    }
+  },
+  "required": ["project"]
+}
